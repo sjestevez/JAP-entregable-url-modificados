@@ -235,6 +235,19 @@ function procesarDatos(){
             formularioFinal[6].value = 1;
             formularioFinal[11].value = formularioPago[6].value;
         }
+
+        let htmlContentToAppend = "";
+        for(let i = 0; i < itemsCarrito.articles.length; i++){
+            itemActual  = itemsCarrito.articles[i];
+            htmlContentToAppend +=`
+            <input type="hidden" id="articuloNombre` + i +`" name="articuloNombre` + i +`" value="` + itemActual.name + `">
+            <input type="hidden" id="articuloPrecio` + i +`" name="articuloPrecio` + i +`" value="` + itemActual.unitCost + `">
+            <input type="hidden" id="articuloMoneda` + i +`" name="articuloMoneda` + i +`" value="` + itemActual.currency + `">
+            <input type="hidden" id="articuloCantidad` + i +`" name="articuloCantidad` + i +`" value="` + itemActual.count + `">   
+            `; 
+        }
+        htmlContentToAppend +=`<input type="hidden" id="subtotalFinal" name="subtotalFinal" value="` + subtotalFinal + `">`
+        formularioFinal.innerHTML += htmlContentToAppend;
         formularioFinal.submit();
     }
 }    
